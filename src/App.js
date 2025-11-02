@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
-import { Menu, X, Code, Database, TrendingUp, BarChart3, Mail, Github, Linkedin, ExternalLink, ChevronLeft, ChevronRight, FileText } from 'lucide-react';
-import { Crown } from 'lucide-react';
+import { Menu, X, Code, Database, TrendingUp, BarChart3, Mail, Github, Linkedin, ExternalLink, ChevronLeft, ChevronRight, FileText, Crown } from 'lucide-react';
 
 const BIPortfolio = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -56,8 +55,8 @@ const BIPortfolio = () => {
     },
     {
       id: 2,
-      title: "Analyse des Offres d’Emploi - Pays Arabes",
-      description: "La conception d’entrepôt de données et la visualisation des offres d’emploi de LinkedIn.",
+      title: "Analyse des Offres d'Emploi - Pays Arabes",
+      description: "La conception d'entrepôt de données et la visualisation des offres d'emploi de LinkedIn.",
       images: [
         "/project-images/final_BI_page-0001.jpg",
         "/project-images/final_BI_page-0002.jpg",
@@ -68,7 +67,7 @@ const BIPortfolio = () => {
       category: "analysis",
       liveLink: "#",
       githubLink: "#",
-      fullDescription: "La conception d’entrepôt de données et la visualisation des offres d’emploi de LinkedIn."
+      fullDescription: "La conception d'entrepôt de données et la visualisation des offres d'emploi de LinkedIn."
     },
     {
       id: 3,
@@ -90,71 +89,7 @@ const BIPortfolio = () => {
       liveLink: "#",
       githubLink: "#",
       fullDescription: "Tableau de bord Power BI analysant indicateurs opérationnels pour optimisation des processus aériens."
-    }/**,
-    
-    {
-      id: 4,
-      title: "Analyse décisionnelle et visualisation de données",
-      description: "Création d’un tableau de bord interactif pour analyser les ventes de produits maritimes par espèce et par produit à partir de données génériques.",
-      images: [
-        "/project-images/FishCo_Sales_page-0001.jpg",
-        "/project-images/FishCo_Sales_page-0002.jpg",
-        "/project-images/FishCo_Sales_page-0003.jpg",
-        "/project-images/FishCo_Sales_page-0004.jpg",
-        "/project-images/FishCo_Sales_page-0005.jpg",
-        "/project-images/FishCo_Sales_page-0006.jpg"
-      ],
-      technologies: ["Power BI", "DAX", "Excel"],
-      category: "optimization",
-      liveLink: "#",
-      githubLink: "#",
-      fullDescription: "Création d’un tableau de bord interactif pour analyser les ventes de produits maritimes par espèce et par produit à partir de données génériques."
-    },    
-    {
-      id: 5,
-      title: "Supply Chain Optimization",
-      description: "End-to-end supply chain visibility dashboard with inventory optimization.",
-      images: [
-        "/project-images/Datax.pptx_page-0001.jpg",
-        "/project-images/Datax.pptx_page-0002.jpg",
-        "/project-images/Datax.pptx_page-0003.jpg",
-        "/project-images/Datax.pptx_page-0004.jpg",
-        "/project-images/Datax.pptx_page-0005.jpg",
-        "/project-images/Datax.pptx_page-0006.jpg",
-        "/project-images/Datax.pptx_page-0007.jpg",
-        "/project-images/Datax.pptx_page-0008.jpg",
-        "/project-images/Datax.pptx_page-0008.jpg",
-        "/project-images/Datax.pptx_page-0009.jpg",
-        "/project-images/Datax.pptx_page-0010.jpg",
-        "/project-images/Datax.pptx_page-0011.jpg",
-        "/project-images/Datax.pptx_page-0012.jpg",
-        "/project-images/Datax.pptx_page-0013.jpg",
-        "/project-images/Datax.pptx_page-0014.jpg",
-        "/project-images/Datax.pptx_page-0015.jpg",
-        "/project-images/Datax.pptx_page-0016.jpg",
-        "/project-images/Datax.pptx_page-0017.jpg",
-        "/project-images/Datax.pptx_page-0018.jpg",
-        "/project-images/Datax.pptx_page-0019.jpg",
-        "/project-images/Datax.pptx_page-0020.jpg",
-        "/project-images/Datax.pptx_page-0021.jpg",
-        "/project-images/Datax.pptx_page-0022.jpg",
-        "/project-images/Datax.pptx_page-0023.jpg",
-        "/project-images/Datax.pptx_page-0024.jpg",
-        "/project-images/Datax.pptx_page-0025.jpg",
-        "/project-images/Datax.pptx_page-0026.jpg",
-        "/project-images/Datax.pptx_page-0027.jpg",
-        "/project-images/Datax.pptx_page-0028.jpg",
-        "/project-images/Datax.pptx_page-0029.jpg",
-        "/project-images/Datax.pptx_page-0030.jpg",
-        "/project-images/Datax.pptx_page-0031.jpg"
-      ],
-      technologies: ["Power BI", "DAX", "Python", "Excel"],
-      category: "optimization",
-      liveLink: "#",
-      githubLink: "#",
-      fullDescription: "Supply chain optimization platform providing end-to-end visibility into inventory, logistics, and demand forecasting."
-    }*/
-    
+    }
   ];
 
   const skills = [
@@ -172,12 +107,12 @@ const BIPortfolio = () => {
     document.body.style.overflow = 'hidden';
   };
 
-  const closeProjectModal = () => {
+  const closeProjectModal = useCallback(() => {
     setSelectedProject(null);
     document.body.style.overflow = 'auto';
-  };
+  }, []);
 
-  const nextImage = () => {
+  const nextImage = useCallback(() => {
     if (selectedProject) {
       if (selectedProject.hasPDF) {
         setCurrentImageIndex((prevIndex) => 
@@ -189,9 +124,9 @@ const BIPortfolio = () => {
         );
       }
     }
-  };
+  }, [selectedProject]);
 
-  const prevImage = () => {
+  const prevImage = useCallback(() => {
     if (selectedProject) {
       if (selectedProject.hasPDF) {
         setCurrentImageIndex((prevIndex) => 
@@ -203,7 +138,7 @@ const BIPortfolio = () => {
         );
       }
     }
-  };
+  }, [selectedProject]);
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -226,7 +161,7 @@ const BIPortfolio = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedProject]);
+  }, [selectedProject, closeProjectModal, nextImage, prevImage]);
 
   return (
     <div className="app">
@@ -294,7 +229,7 @@ const BIPortfolio = () => {
               <div className="image-placeholder">
                 <img
                   src="/project-images/photo.jpeg"
-                  alt="Profile photo"
+                  alt="ELASRI Mohamed Youssef"
                   className="image-placeholder" 
                 />
               </div>
@@ -500,7 +435,7 @@ const BIPortfolio = () => {
                   <>
                     <img 
                       src={selectedProject.images[currentImageIndex]} 
-                      alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+                      alt={`${selectedProject.title} - Slide ${currentImageIndex + 1}`}
                       onError={(e) => {
                         e.target.src = `https://placehold.co/800x500/667eea/ffffff?text=${encodeURIComponent(selectedProject.title + ' - ' + (currentImageIndex + 1))}`;
                       }}
