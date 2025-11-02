@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Menu, X, Code, Database, TrendingUp, BarChart3, Mail, Github, Linkedin, ExternalLink, ChevronLeft, ChevronRight, FileText, Download } from 'lucide-react';
+import { Menu, X, Code, Database, TrendingUp, BarChart3, Mail, Github, Linkedin, ExternalLink, ChevronLeft, ChevronRight, FileText } from 'lucide-react';
 import { Crown } from 'lucide-react';
 
 const BIPortfolio = () => {
@@ -209,15 +209,6 @@ const BIPortfolio = () => {
     if (e.target === e.currentTarget) {
       closeProjectModal();
     }
-  };
-
-  const downloadPDF = (pdfLink, projectTitle) => {
-    const link = document.createElement('a');
-    link.href = pdfLink;
-    link.download = `${projectTitle.replace(/\s+/g, '-').toLowerCase()}.pdf`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
   };
 
   useEffect(() => {
